@@ -1,0 +1,38 @@
+{
+  "name": "vite-vue-typescript-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "serve": "vite",
+    "build": "vue-tsc -b && vite build",
+    "build:prod": "vue-tsc -b && vite build --production",
+    "preview": "vite preview",
+    "lint": "eslint --ext .ts,.vue"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "element-plus": "^2.9.5",
+    "jwt-decode": "^4.0.0",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.8",
+    "@typescript-eslint/eslint-plugin": "^8.25.0",
+    "@typescript-eslint/parser": "^8.25.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/eslint-config-prettier": "^10.2.0",
+    "@vue/tsconfig": "^0.7.0",
+    "@vue/typescript": "^1.8.20",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-vue": "^9.32.0",
+    "prettier": "^3.5.2",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.25.0",
+    "unplugin-auto-import": "^19.1.1",
+    "unplugin-vue-components": "^28.4.1",
+    "vite": "^6.2.0",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vue-tsc": "^2.2.4"
+  }
+}
