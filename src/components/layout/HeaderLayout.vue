@@ -47,6 +47,8 @@ const close = () => (dialogVisible.value = false);
 
 <style lang="scss" scoped>
 .toolbar {
+  height: 60px;
+
   &__setting-icon {
     margin-right: 8px;
     margin-top: 1px;

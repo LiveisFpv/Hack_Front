@@ -14,15 +14,19 @@
       </el-main>
     </el-container>
 
-    <!-- <el-aside width="200px">
-      <nav-layout />
-    </el-aside> -->
+    <el-aside :width="isOpen ? '300px' : '0'">
+      <filter-aside />
+    </el-aside>
   </el-container>
 </template>
 
 <script lang="ts" setup>
 import HeaderLayout from '@/components/layout/HeaderLayout.vue';
 import NavLayout from '@/components/layout/NavLayout.vue';
+import FilterAside from '@/components/layout/FIlterAside.vue';
+import { useFultersApp } from '@/utils/useFultersApp';
+
+const { isOpen } = useFultersApp;
 </script>
 
 <style lang="scss">
@@ -47,7 +51,6 @@ import NavLayout from '@/components/layout/NavLayout.vue';
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
   right: 20px;
 }
 </style>

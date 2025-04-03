@@ -35,6 +35,7 @@ declare module 'vue' {
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
+    FIlterAside: typeof import('./src/components/layout/FIlterAside.vue')['default']
     HeaderLayout: typeof import('./src/components/layout/HeaderLayout.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     HomeView: typeof import('./src/components/HomeView.vue')['default']

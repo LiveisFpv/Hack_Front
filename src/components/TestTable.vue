@@ -6,7 +6,13 @@
 
     <el-main>
       <el-button type="success" :icon="Plus"> Добавить страну </el-button>
-      <el-button type="primary" :icon="Setting"> Настройки фильтров </el-button>
+      <el-button
+        type="primary"
+        :icon="Setting"
+        :disabled="isOpenFilters"
+        @click="openFilters([], {}, () => void 0)">
+        Настройки фильтров
+      </el-button>
       <el-table
         :data="tableData"
         :default-sort="defaultSort"
@@ -49,6 +55,7 @@ import {
   changeSortLibFormatFrom,
   changeSortLibFormatTo,
 } from '@/utils/changeSortLibFormat';
+import { useFultersApp } from '@/utils/useFultersApp';
 
 type TProps = {
   current: number | string;
@@ -65,6 +72,7 @@ const props = withDefaults(defineProps<TProps>(), {
 });
 const router = useRouter();
 const { getCountries } = useCountryApi();
+const { isOpen: isOpenFilters, openFilters } = useFultersApp;
 
 const currentPagination = ref<TPagination>(getDefaultPagination());
 const currentFilter = ref<TFilterRequest[]>([]);

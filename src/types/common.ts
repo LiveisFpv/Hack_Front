@@ -1,5 +1,7 @@
-export type TFilterRequest = {
-  field: string;
+import type { TConfigFilterItem } from './ConfigFilterItem';
+
+export type TFilterRequest<Fields = string> = {
+  field: Fields;
   value: string;
 };
 
@@ -34,3 +36,12 @@ export type GetListRequest = {
 export type GetItemRequest = {
   id: string | number;
 };
+
+export type TListItem = {
+  id: string | number;
+  title: string;
+};
+
+export type TConfigFilter<Fields extends string = string> = Partial<
+  Record<Fields, TConfigFilterItem>
+>;
