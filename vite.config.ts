@@ -32,7 +32,7 @@ export default defineConfig(({ mode }) => {
     },
     // Опции запуска vite-сервера
     server: {
-      host: '0.0.0.0',
+      host: '127.0.0.1',
       port: 4000,
       open: true,
     },
