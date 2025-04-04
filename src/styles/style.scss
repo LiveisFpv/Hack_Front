@@ -1,3 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+:root {
+    --variable: #fd4c00;
+    --dark: #1d2429;
+    --new-gradient: linear-gradient(#fd4c00, #f4753f);
+}
+
+html {
+    font-family: "Inter", sans-serif;
+    background-color: var(--dark);
+    color: white;
+}
+
 a {
     text-decoration: none;
     color: inherit;
@@ -9,4 +23,13 @@ a {
 
 .el-container > .el-header {
     height: fit-content;
+}
+
+.container {
+    max-width: 1692px;
+    padding: 20px;
+}
+
+.variable-color {
+    color: var(--variable);
 }

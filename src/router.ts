@@ -1,10 +1,16 @@
 import { createWebHistory, createRouter, type RouteRecordRaw } from 'vue-router';
 
-import HomeView from '@/components/HomeView.vue';
+import HomePage from '@/components/HomePage.vue';
 import TestTable from '@/components/TestTable.vue';
 
 const routes: RouteRecordRaw[] = [
-  { path: '/', name: 'home', component: HomeView },
+  { path: '/', name: 'home', component: HomePage },
+  {
+    path: '/suggest/ya-token',
+    name: 'ya-token',
+    component: HomePage,
+    props: (route) => ({ ...route.query, ...route.params }),
+  },
   {
     path: '/test-table',
     name: 'test-table',

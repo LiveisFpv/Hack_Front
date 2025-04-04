@@ -2,7 +2,8 @@
   <el-container class="layout-container">
     <el-container>
       <el-header>
-        <header-layout class="el-header" />
+        <!-- <header-layout class="el-header" /> -->
+        <header-page />
       </el-header>
 
       <el-main>
@@ -17,7 +18,8 @@
 </template>
 
 <script lang="ts" setup>
-import HeaderLayout from '@/components/layout/HeaderLayout.vue';
+// import HeaderLayout from '@/components/layout/HeaderLayout.vue';
+import HeaderPage from '@/components/layout/HeaderPage.vue';
 import FilterAside from '@/components/layout/FIlterAside.vue';
 import { useFultersApp } from '@/utils/useFultersApp';
 
@@ -30,8 +32,7 @@ const { isOpen } = useFultersApp;
   top: 0;
   display: flex;
   justify-content: center;
-  // background: rgba(235,158,180, 1);
-  background: white;
+  background: var(--dark);
   width: 100%;
   color: var(--el-text-color-primary);
   font-size: 12px;

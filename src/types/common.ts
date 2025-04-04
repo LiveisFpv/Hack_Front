@@ -23,9 +23,11 @@ export type GetListResponse<TResponse> = {
   pagination: TPagination;
 };
 
-export type GetItemResponse<TResponse> = {
-  data: TResponse;
+export type TResponse<TResponseType> = {
+  data: TResponseType;
 };
+
+export type GetItemResponse<TResponseType> = TResponse<TResponseType>;
 
 export type GetListRequest = {
   filter?: TFilterRequest[];
