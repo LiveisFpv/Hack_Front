@@ -3,7 +3,7 @@ import { cloneDeep } from 'lodash';
 import { ref } from 'vue';
 
 export const useFultersApp = (() => {
-  const isOpen = ref(true);
+  const isOpen = ref(false);
   const configFilters = ref<TConfigFilter>({});
   const currentFilters = ref<Partial<Record<string, TFilterRequest>>>({});
   const editFilters = ref<Partial<Record<string, TFilterRequest>>>({});

@@ -26,3 +26,6 @@ const isAuth = ref<boolean>(props.isAuth);
 const toggleForm = () => (isAuth.value = !isAuth.value);
 const close = () => emit('close');
 </script>
+
+<style lang="scss" scoped>
+</style>
