@@ -87,9 +87,9 @@ const defaultSort = computed<Sort>(() =>
   }),
 );
 
-const click = () => {
-  changeAddress({ by: 'country_capital', direction: 'desc' });
-};
+// const click = () => {
+//   changeAddress({ by: 'country_capital', direction: 'desc' });
+// };
 
 const changeAddress = (newProps: Partial<TProps>) => {
   router.push({ name: 'test-table', query: { ...props, ...newProps }, replace: true });
@@ -97,9 +97,9 @@ const changeAddress = (newProps: Partial<TProps>) => {
 
 console.log('router.currentRoute', router.currentRoute.value);
 
-const testChange = (...args: unknown[]) => {
-  console.log('args', ...args);
-};
+// const testChange = (...args: unknown[]) => {
+//   console.log('args', ...args);
+// };
 
 const changeSorting = (sorting: Sort) =>
   changeAddress(changeSortLibFormatFrom<keyof TCountry>(sorting));

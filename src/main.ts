@@ -1,11 +1,14 @@
 import { createApp } from 'vue';
-
+declare module 'vite-tsconfig-paths' {
+  
+}
 import ElementPlus from 'element-plus';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 import 'element-plus/dist/index.css';
 import 'normalize.css';
 import '@/styles/style.scss';
-import App from '@/App.vue';
+import '@/side/yaSide.js';
+import App from './App.vue';
 import useAuthStore, { USER_PROVIDE_SYMBOL } from '@/store/useAuthStore';
 import router from '@/router';
 

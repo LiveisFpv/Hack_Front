@@ -13,9 +13,7 @@
           :key="configure.name"
           :prop="configure.name"
           :label="configure.config.title">
-          <el-input
-            v-if="configure.config.type === 'string'"
-            v-model="editFilters[configure.name]" />
+          <el-input v-if="configure.config.type === 'string'" />
         </el-form-item>
       </el-form>
     </el-main>
@@ -35,8 +33,6 @@ import { computed } from 'vue';
 const {
   close: onClose,
   configFilters,
-  currentFilters,
-  editFilters,
 } = useFultersApp as typeof useFultersApp & {
   currentFilters: TFilterRequest<keyof typeof useFultersApp.configFilters.value>;
   editFilters: TFilterRequest<keyof typeof useFultersApp.configFilters.value>;

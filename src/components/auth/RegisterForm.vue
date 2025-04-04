@@ -45,13 +45,14 @@
     </el-form-item>
     <el-footer class="text-center">
       <slot name="footer"></slot>
+      <div class="buttonContainerId"></div>
     </el-footer>
   </el-form>
 </template>
 
 <script lang="ts" setup>
 import { reactive, ref, inject } from 'vue';
-import { ElLoading, type FormInstance } from 'element-plus';
+import type { FormInstance } from 'element-plus';
 import type { TRegisterForm } from '@/types/User';
 import useUserApi from '@/api/useUserApi';
 import useAuthStore, { USER_PROVIDE_SYMBOL } from '@/store/useAuthStore';
@@ -87,10 +88,45 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   });
 };
 
+const oauthQueryParams: {
+  client_id: string;
+  response_type: string;
+  redirect_uri: string;
+} = {
+  client_id: 'c46f0c53093440c39f12eff95a9f2f93',
+  response_type: 'token',
+  redirect_uri: 'https://examplesite.com/suggest/token',
+}
+
+// const tokenPageOrigin = {
+
+// }
+
 const resetForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.resetFields();
 };
+
+(() => {
+  (
+    window as typeof window & {
+      YaAuthSuggest: {
+        init: (...args: unknown[]) => Promise<{ handler: () => unknown }>;
+      };
+    }
+  ).YaAuthSuggest.init(oauthQueryParams, {
+    view: 'button',
+    parentId: 'buttonContainerId',
+    buttonSize: 'm',
+    buttonView: 'main',
+    buttonTheme: 'light',
+    buttonBorderRadius: '0',
+    buttonIcon: 'ya',
+  })
+    .then(({ handler }) => handler())
+    .then((data) => console.log('Сообщение с токеном', data))
+    .catch((error) => console.log('Обработка ошибки', error));
+})();
 
 const close = () => emit('close');
 </script>
