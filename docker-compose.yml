@@ -10,11 +10,11 @@ services:
       #  - certbot_data:/etc/letsencrypt
       #  - certbot_www:/var/www/certbot
     ports:
-      - '443:4000'
-      - '80:4000'
+      - '443:443'
+      - '80:80'
     labels:
       - "traefik.enable=true"
-      - "traefik.http.services.app.loadbalancer.server.port=4000"
+      - "traefik.http.services.app.loadbalancer.server.port=443"
       - "traefik.http.routers.app.rule=Host(`hackatonsite.jumpingcrab.com`)"
     networks:
       - web
@@ -24,7 +24,7 @@ services:
     volumes:
       - certbot_data:/etc/letsencrypt
       - certbot_www:/var/www/certbot
-    command: certonly --webroot -w /var/www/certbot --email vasiania123@yandex.ru --agree-tos --no-eff-email -d hackatonsite.jumpingcrab.com -d www.hackatonsite.jumpingcrab.com
+    command: certonly --webroot -w /var/www/certbot --register-unsafely-without-email --agree-tos --no-eff-email -d hackatonsite.jumpingcrab.com
 
 volumes:
   certbot_data:
