@@ -1,33 +1,56 @@
 <template>
-  <register-form />
+  <el-container class="layout-container">
+    <el-aside width="200px">
+      <nav-layout />
+    </el-aside>
+
+    <el-container>
+      <el-header>
+        <header-layout class="el-header" />
+      </el-header>
+
+      <el-main>
+        <RouterView />
+      </el-main>
+    </el-container>
+
+    <el-aside :width="isOpen ? '300px' : '0'">
+      <filter-aside />
+    </el-aside>
+  </el-container>
 </template>
 
-<script setup lang="ts">
-import RegisterForm from '@/components/RegisterForm.vue';
-import useCountryApi from '@/api/useCountryApi';
-import type useAuthStore from './store/useAuthStore';
-import { inject, onMounted } from 'vue';
-import { USER_PROVIDE_SYMBOL } from './store/useAuthStore';
+<script lang="ts" setup>
+import HeaderLayout from '@/components/layout/HeaderLayout.vue';
+import NavLayout from '@/components/layout/NavLayout.vue';
+import FilterAside from '@/components/layout/FIlterAside.vue';
+import { useFultersApp } from '@/utils/useFultersApp';
 
-const { getCountries } = useCountryApi();
-onMounted(async () => {
-  const countries = await getCountries();
-  console.log('getCountries', countries);
-});
-console.log('aa', inject<ReturnType<typeof useAuthStore>>(USER_PROVIDE_SYMBOL));
+const { isOpen } = useFultersApp;
 </script>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<style lang="scss">
+.el-header {
+  position: relative;
+  background-color: var(--el-color-primary-light-7);
+  color: var(--el-text-color-primary);
+  text-align: right;
+  font-size: 12px;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.layout-container .el-aside {
+  color: var(--el-text-color-primary);
+  background: var(--el-color-primary-light-8);
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.layout-container .el-menu {
+  border-right: none;
+}
+.layout-container .el-main {
+  padding: 20px;
+}
+.layout-container .toolbar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  right: 20px;
 }
 </style>
