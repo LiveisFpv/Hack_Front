@@ -20,9 +20,7 @@
           <span>Доступен 24 часа</span>
         </div>
 
-        <img
-          class="slide-1__image"
-          src="https://fitnesstula.ru/wp-content/uploads/2024/12/png-klev-club-32g2-p-fitnes-png-16.png" />
+        <img class="slide-1__image" src="/assets/sports-1.png" />
       </div>
     </div>
     <div class="slide-1__orange-block"></div>
