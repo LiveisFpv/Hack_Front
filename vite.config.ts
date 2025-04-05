@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
   process.env = { ...process.env, ...env };
 
   return {
-    base: './suggest/',
+    base: './',
     plugins: [
       vue(),
       tsconfigPaths(),

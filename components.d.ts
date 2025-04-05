@@ -43,7 +43,6 @@ declare module 'vue' {
     HomeSlide3: typeof import('./src/components/homeSlides/HomeSlide3.vue')['default']
     HomeView: typeof import('./src/components/HomeView.vue')['default']
     NavLayout: typeof import('./src/components/layout/NavLayout.vue')['default']
-    Profile: typeof import('./src/components/auth/Profile.vue')['default']
     ProfileForm: typeof import('./src/components/auth/ProfileForm.vue')['default']
     RegisterForm: typeof import('./src/components/auth/RegisterForm.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

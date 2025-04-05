@@ -11,7 +11,6 @@ export default () => {
 
   const user = ref<TUser | null>(null);
   const profile = ref<TEditUserForm | null>(null);
-  
 
   const token = computed<string | null>(() => user.value?.token ?? null);
 
@@ -21,7 +20,8 @@ export default () => {
     if (newUser) sessionStorage.setItem(TOKEN_STORAGE, newUser.token);
     else sessionStorage.removeItem(TOKEN_STORAGE);
 
-    profile.value = await getUser();
+    const { data } = await getUser();
+    profile.value = data;
   };
 
   const authUser = (loginResponse: TLoginResponse) => {
