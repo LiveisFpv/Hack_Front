@@ -30,11 +30,14 @@ import useUserApi from '@/api/useUserApi';
 const { isOpen } = useFultersApp;
 const { getUser } = useUserApi();
 
-const { setProfile } = inject<ReturnType<typeof useAuthStore>>(USER_PROVIDE_SYMBOL)!;
+const { setProfile, user } =
+  inject<ReturnType<typeof useAuthStore>>(USER_PROVIDE_SYMBOL)!;
 
 const loadProfile = async () => {
-  const { data } = await getUser();
-  setProfile(data);
+  if (user.value) {
+    const { data } = await getUser();
+    setProfile(data);
+  }
 };
 
 const loadProfileDecorated = useLoadingDecorator(loadProfile);
