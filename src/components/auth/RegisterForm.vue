@@ -180,7 +180,7 @@ import { getFitnessTargetList } from './getFitnessTargetList';
 
 const emit = defineEmits({ 'toggle-form': null, close: null });
 
-const { login, register, editUser, getUser } = useUserApi();
+const { login, register, getUser, createProfile } = useUserApi();
 const { authUser, setProfile, user } =
   inject<ReturnType<typeof useAuthStore>>(USER_PROVIDE_SYMBOL)!;
 
@@ -217,23 +217,9 @@ const submit = async () => {
   console.log('loginResponse', loginResponse);
   authUser(loginResponse.data);
   console.log('user', user.value?.uid);
-  await editUser(dynamicValidateForm);
-  try {
-    const { data: profileData } = await getUser();
-    setProfile(profileData);
-  } catch (e) {
-    setProfile({
-      user_firstName: '',
-      user_lastName: '',
-      user_middleName: '',
-      user_birthday: '',
-      user_height: undefined,
-      user_weight: undefined,
-      user_fitness_target: '',
-      user_sex: false,
-      user_level: '',
-    });
-  }
+  await createProfile(dynamicValidateForm);
+  const { data: profileData } = await getUser();
+  setProfile(profileData);
 
   ElNotification({
     title: 'Регистрация',

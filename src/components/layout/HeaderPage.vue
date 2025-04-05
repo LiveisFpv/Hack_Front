@@ -6,8 +6,9 @@
       </RouterLink>
     </el-container>
 
-    <el-container>
+    <el-container class="header-page__links">
       <RouterLink class="router-link" :to="{ name: 'home' }"> Главная </RouterLink>
+      <RouterLink class="router-link" :to="{ name: 'training-plan' }"> План </RouterLink>
     </el-container>
     <el-container>
       <template v-if="user">
@@ -93,6 +94,12 @@ const close = () => (dialogVisible.value = false);
   &__logo {
     font-size: 33px;
     font-weight: 700;
+  }
+
+  &__links {
+    gap: 30px;
+    text-align: center;
+    align-items: center;
   }
 }
 

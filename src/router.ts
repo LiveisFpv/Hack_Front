@@ -1,7 +1,7 @@
 import { createWebHistory, createRouter, type RouteRecordRaw } from 'vue-router';
 
 import HomePage from '@/components/HomePage.vue';
-import TestTable from '@/components/TestTable.vue';
+import TrainingPlan from '@/components/TrainingPlan.vue';
 import ProfileForm from '@/components/auth/ProfileForm.vue';
 
 const routes: RouteRecordRaw[] = [
@@ -13,9 +13,9 @@ const routes: RouteRecordRaw[] = [
     props: (route) => ({ ...route.query, ...route.params }),
   },
   {
-    path: '/test-table',
-    name: 'test-table',
-    component: TestTable,
+    path: '/training-plan',
+    name: 'training-plan',
+    component: TrainingPlan,
     props: (route) => ({ ...route.query, ...route.params }),
   },
   {

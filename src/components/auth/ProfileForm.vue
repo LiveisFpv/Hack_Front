@@ -206,10 +206,6 @@ const resetForm = () => {
 .profile {
   position: relative;
 
-  & > * {
-    color: white;
-  }
-
   .container {
     margin: 0 auto;
     max-width: 720px;
@@ -232,10 +228,6 @@ const resetForm = () => {
     width: 30%;
     height: 100%;
   }
-}
-
-.profile .el-form-item__label {
-  color: white;
 }
 
 .hidden {

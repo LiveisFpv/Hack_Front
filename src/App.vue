@@ -10,24 +10,17 @@
         <RouterView v-if="isLoading" />
       </el-main>
     </el-container>
-
-    <el-aside :width="isOpen ? '300px' : '0'">
-      <filter-aside />
-    </el-aside>
   </el-container>
 </template>
 
 <script lang="ts" setup>
 import HeaderPage from '@/components/layout/HeaderPage.vue';
-import FilterAside from '@/components/layout/FIlterAside.vue';
-import { useFultersApp } from '@/utils/useFultersApp';
 import type useAuthStore from '@/store/useAuthStore';
 import { inject, onMounted, ref } from 'vue';
 import { USER_PROVIDE_SYMBOL } from '@/store/useAuthStore';
 import { useLoadingDecorator } from '@/utils/useLoadingDecorator';
 import useUserApi from '@/api/useUserApi';
 
-const { isOpen } = useFultersApp;
 const { getUser } = useUserApi();
 
 const { setProfile, user } =

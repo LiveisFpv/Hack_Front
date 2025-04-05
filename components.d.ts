@@ -49,5 +49,6 @@ declare module 'vue' {
     Slide2Card: typeof import('./src/components/homeSlides/Slide2Card.vue')['default']
     Slide3Card: typeof import('./src/components/homeSlides/Slide3Card.vue')['default']
     TestTable: typeof import('./src/components/TestTable.vue')['default']
+    TrainingPlan: typeof import('./src/components/TrainingPlan.vue')['default']
   }
 }

@@ -10,7 +10,7 @@ import useBaseApi from './base/useBaseApi';
 import type { GetItemResponse } from '@/types';
 
 export default () => {
-  const { get, post } = useBaseApi();
+  const { get, post, put } = useBaseApi();
 
   const login = async (loginForm: TLoginForm) => {
     return await post<GetItemResponse<TLoginResponse>>('/auth', loginForm);
@@ -21,6 +21,10 @@ export default () => {
   };
 
   const editUser = async (editUserForm: TEditUserForm) => {
+    return await put<TEditUserResponse>('/api/v1/edit-profile', editUserForm);
+  };
+
+  const createProfile = async (editUserForm: TEditUserForm) => {
     return await post<TEditUserResponse>('/api/v1/edit-profile', editUserForm);
   };
 
@@ -28,5 +32,5 @@ export default () => {
     return await get<GetItemResponse<TEditUserForm>>('/api/v1/user');
   };
 
-  return { login, register, getUser, editUser };
+  return { login, register, getUser, editUser, createProfile };
 };
