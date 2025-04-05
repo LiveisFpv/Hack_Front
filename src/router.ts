@@ -2,6 +2,7 @@ import { createWebHistory, createRouter, type RouteRecordRaw } from 'vue-router'
 
 import HomePage from '@/components/HomePage.vue';
 import TestTable from '@/components/TestTable.vue';
+import ProfileForm from '@/components/auth/ProfileForm.vue';
 
 const routes: RouteRecordRaw[] = [
   { path: '/', name: 'home', component: HomePage },
@@ -16,6 +17,11 @@ const routes: RouteRecordRaw[] = [
     name: 'test-table',
     component: TestTable,
     props: (route) => ({ ...route.query, ...route.params }),
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: ProfileForm,
   },
 ];
 

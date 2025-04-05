@@ -25,7 +25,7 @@ export default () => {
   };
 
   const getUser = async () => {
-    return await get('/user');
+    return await get<GetItemResponse<TEditUserForm>>('/user');
   };
 
   return { login, register, getUser, editUser };

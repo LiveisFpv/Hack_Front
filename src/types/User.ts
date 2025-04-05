@@ -18,17 +18,15 @@ export type TRegisterResponse = TResponse<unknown>;
 export type TEditUserResponse = TResponse<unknown>;
 
 export type TEditUserForm = {
-  uid?: number;
-  firstName: string;
-  lastName: string;
-  middleName: string;
-  birthday: Date | string;
-  height?: number;
-  weight?: number;
-  fitness_target: null;
-  sex: boolean;
-  hypertain: boolean;
-  diabet: boolean;
+  user_firstName: string;
+  user_lastName: string;
+  user_middleName: string;
+  user_birthday: Date | string;
+  user_height?: number;
+  user_weight?: number;
+  user_fitness_target: string;
+  user_sex: boolean;
+  user_level: '' | number;
 };
 
 export type TLoginForm = {
