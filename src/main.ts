@@ -10,7 +10,7 @@ import App from './App.vue';
 import useAuthStore, { USER_PROVIDE_SYMBOL } from '@/store/useAuthStore';
 import router from '@/router';
 
-const app = creatйeApp(App);
+const app = createApp(App);
 app.use(router);
 app.use(ElementPlus);
 app.provide(USER_PROVIDE_SYMBOL, useAuthStore());
