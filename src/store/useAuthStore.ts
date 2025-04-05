@@ -19,7 +19,17 @@ export default () => {
   };
 
   const setProfile = async (newProfile: TEditUserForm | null) => {
-    profile.value = newProfile;
+    profile.value = {
+      user_firstName: newProfile?.user_firstName ?? '',
+      user_lastName: newProfile?.user_lastName ?? '',
+      user_middleName: newProfile?.user_middleName ?? '',
+      user_birthday: newProfile?.user_birthday ? new Date(newProfile.user_birthday) : '',
+      user_height: newProfile?.user_height ?? undefined,
+      user_weight: newProfile?.user_weight ?? undefined,
+      user_fitness_target: newProfile?.user_fitness_target ?? '',
+      user_sex: newProfile?.user_sex ?? false,
+      user_level: newProfile?.user_level ?? '',
+    };
   };
 
   const authUser = (loginResponse: TLoginResponse) => {

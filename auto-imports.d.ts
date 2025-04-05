@@ -7,5 +7,6 @@
 export {}
 declare global {
   const ElLoading: typeof import('element-plus/es')['ElLoading']
+  const ElNo: typeof import('element-plus/es')['ElNo']
   const ElNotification: typeof import('element-plus/es')['ElNotification']
 }

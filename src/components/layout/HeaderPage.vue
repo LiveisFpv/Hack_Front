@@ -22,12 +22,6 @@
                 <el-dropdown-item @click="toProfile">Профиль</el-dropdown-item>
                 <el-dropdown-item @click="logout">Выйти</el-dropdown-item>
               </el-dropdown-menu>
-              <el-dropdown-menu v-else>
-                <el-dropdown-item @click="openModal(true)">Войти</el-dropdown-item>
-                <el-dropdown-item @click="openModal(false)">
-                  Зарегистрироваться
-                </el-dropdown-item>
-              </el-dropdown-menu>
             </template>
           </el-dropdown>
 
@@ -111,6 +105,7 @@ const close = () => (dialogVisible.value = false);
   width: 100%;
   font-size: 30px;
   font-weight: 700;
+  color: #ffffff;
 
   &.router-link-active {
     color: var(--variable);

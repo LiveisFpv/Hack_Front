@@ -7,7 +7,7 @@
       </el-header>
 
       <el-main>
-        <RouterView />
+        <RouterView v-if="isLoading" />
       </el-main>
     </el-container>
 
@@ -22,7 +22,7 @@ import HeaderPage from '@/components/layout/HeaderPage.vue';
 import FilterAside from '@/components/layout/FIlterAside.vue';
 import { useFultersApp } from '@/utils/useFultersApp';
 import type useAuthStore from '@/store/useAuthStore';
-import { inject, onMounted } from 'vue';
+import { inject, onMounted, ref } from 'vue';
 import { USER_PROVIDE_SYMBOL } from '@/store/useAuthStore';
 import { useLoadingDecorator } from '@/utils/useLoadingDecorator';
 import useUserApi from '@/api/useUserApi';
@@ -33,10 +33,13 @@ const { getUser } = useUserApi();
 const { setProfile, user } =
   inject<ReturnType<typeof useAuthStore>>(USER_PROVIDE_SYMBOL)!;
 
+const isLoading = ref(true);
+
 const loadProfile = async () => {
   if (user.value) {
     const { data } = await getUser();
     setProfile(data);
+    isLoading.value = false;
   }
 };
 

@@ -38,18 +38,6 @@
         autocomplete="off" />
     </el-form-item>
     <el-form-item
-      label="Имя"
-      prop="user_firstName"
-      :rules="[
-        {
-          required: true,
-          message: 'Пожалуйста, введите имя',
-          trigger: 'blur',
-        },
-      ]">
-      <el-input v-model="dynamicValidateForm.user_firstName" />
-    </el-form-item>
-    <el-form-item
       label="Фамилия"
       prop="user_lastName"
       :rules="[
@@ -60,6 +48,18 @@
         },
       ]">
       <el-input v-model="dynamicValidateForm.user_lastName" />
+    </el-form-item>
+    <el-form-item
+      label="Имя"
+      prop="user_firstName"
+      :rules="[
+        {
+          required: true,
+          message: 'Пожалуйста, введите имя',
+          trigger: 'blur',
+        },
+      ]">
+      <el-input v-model="dynamicValidateForm.user_firstName" />
     </el-form-item>
     <el-form-item label="Отчество" prop="user_middleName" :rules="[]">
       <el-input v-model="dynamicValidateForm.user_middleName" />
@@ -163,15 +163,14 @@
     </el-form-item>
     <el-footer class="text-center">
       <slot name="footer"></slot>
-      <div class="buttonContainerId"></div>
     </el-footer>
   </el-form>
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, inject, onMounted, watch } from 'vue';
+import { reactive, ref, inject } from 'vue';
 import { Male, Female } from '@element-plus/icons-vue';
-import type { FormInstance } from 'element-plus';
+import { ElNotification, type FormInstance } from 'element-plus';
 import type { TEditUserForm, TRegisterForm } from '@/types/User';
 import useUserApi from '@/api/useUserApi';
 import useAuthStore, { USER_PROVIDE_SYMBOL } from '@/store/useAuthStore';
@@ -203,20 +202,14 @@ const dynamicValidateForm = reactive<TRegisterForm & TEditUserForm>({
   user_level: '',
 });
 
-watch(
-  () => dynamicValidateForm.user_level,
-  () => {
-    console.log('dynamicValidateForm.user_level', dynamicValidateForm.user_level);
-  },
-);
-
 const toggleSex = () => {
   dynamicValidateForm.user_sex = !dynamicValidateForm.user_sex;
 };
 
 const submit = async () => {
-  await register(dynamicValidateForm);
-  // console.log('register data', data);
+  const { data: registerData } = await register(dynamicValidateForm);
+  if (!registerData) return;
+
   const loginResponse = await login({
     email: dynamicValidateForm.email,
     password: dynamicValidateForm.password,
@@ -225,8 +218,28 @@ const submit = async () => {
   authUser(loginResponse.data);
   console.log('user', user.value?.uid);
   await editUser(dynamicValidateForm);
-  const { data: profileData } = await getUser();
-  setProfile(profileData);
+  try {
+    const { data: profileData } = await getUser();
+    setProfile(profileData);
+  } catch (e) {
+    setProfile({
+      user_firstName: '',
+      user_lastName: '',
+      user_middleName: '',
+      user_birthday: '',
+      user_height: undefined,
+      user_weight: undefined,
+      user_fitness_target: '',
+      user_sex: false,
+      user_level: '',
+    });
+  }
+
+  ElNotification({
+    title: 'Регистрация',
+    message: 'Пользователь успешно зарегистрирован!',
+    type: 'success',
+  });
 
   close();
 };
@@ -246,33 +259,6 @@ const resetForm = (formEl: FormInstance | undefined) => {
 };
 
 const close = () => emit('close');
-
-onMounted(() => {
-  (
-    window as typeof window & {
-      YaAuthSuggest: {
-        init: (...args: unknown[]) => Promise<{ handler: () => unknown }>;
-      };
-    }
-  ).YaAuthSuggest.init(
-    {
-      client_id: 'bc1e55c07b414058ab0ce164c4d45d0c',
-      response_type: 'token',
-    },
-    {
-      view: 'button',
-      parentId: 'buttonContainerId',
-      buttonSize: 'm',
-      buttonView: 'main',
-      buttonTheme: 'light',
-      buttonBorderRadius: '0',
-      buttonIcon: 'ya',
-    },
-  )
-    .then(({ handler }) => handler())
-    .then((data) => console.log('Сообщение с токеном', data))
-    .catch((error) => console.log('Обработка ошибки', error));
-});
 </script>
 
 <style lang="scss" scoped>
