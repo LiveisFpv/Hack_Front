@@ -19,6 +19,7 @@
               src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
             <template #dropdown>
               <el-dropdown-menu v-if="user">
+                <el-dropdown-item @click="toProfile">Профиль</el-dropdown-item>
                 <el-dropdown-item @click="logout">Выйти</el-dropdown-item>
               </el-dropdown-menu>
               <el-dropdown-menu v-else>
@@ -30,11 +31,12 @@
             </template>
           </el-dropdown>
 
-          <span class="text-large font-600 mr-3"> Title </span>
-          <span class="text-sm mr-2" style="color: var(--el-text-color-regular)">
-            Sub title
+          <span class="text-large font-600 mr-3">
+            {{ profile?.user_lastName ?? '-' }}
           </span>
-          <el-tag>Default</el-tag>
+          <span class="text-sm mr-2" style="color: var(--el-text-color-regular)">
+            {{ profile?.user_firstName ?? '-' }}
+          </span>
         </div>
       </template>
       <template v-else>
@@ -56,10 +58,17 @@
 import AuthContainer from '@/components/auth/AuthContainer.vue';
 import useAuthStore, { USER_PROVIDE_SYMBOL } from '@/store/useAuthStore';
 import { inject, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
-const { user, logout } = inject<ReturnType<typeof useAuthStore>>(USER_PROVIDE_SYMBOL)!;
+const { user, profile, logout } =
+  inject<ReturnType<typeof useAuthStore>>(USER_PROVIDE_SYMBOL)!;
+const router = useRouter();
 const dialogVisible = ref<boolean>(false);
 const isAuth = ref<boolean>(false);
+
+const toProfile = () => {
+  router.push({ name: 'profile' });
+};
 
 const openModal = (value: boolean) => {
   isAuth.value = value;

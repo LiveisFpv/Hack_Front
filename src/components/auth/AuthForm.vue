@@ -58,8 +58,9 @@ import { useLoadingDecorator } from '@/utils/useLoadingDecorator';
 
 const emit = defineEmits({ 'toggle-form': null, close: null });
 
-const { login } = useUserApi();
-const { authUser } = inject<ReturnType<typeof useAuthStore>>(USER_PROVIDE_SYMBOL)!;
+const { login, getUser } = useUserApi();
+const { authUser, setProfile } =
+  inject<ReturnType<typeof useAuthStore>>(USER_PROVIDE_SYMBOL)!;
 
 const formRef = ref<FormInstance>();
 const dynamicValidateForm = reactive<TLoginForm>({
@@ -70,7 +71,11 @@ const dynamicValidateForm = reactive<TLoginForm>({
 const submit = async () => {
   const loginResponse = await login(dynamicValidateForm);
   authUser(loginResponse.data);
-  close();
+  if (loginResponse.data) {
+    const { data: profileData } = await getUser();
+    setProfile(profileData);
+    close();
+  }
 };
 
 const submitDecorated = useLoadingDecorator(submit);

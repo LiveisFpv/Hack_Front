@@ -39,7 +39,7 @@
     </el-form-item>
     <el-form-item
       label="Имя"
-      prop="firstName"
+      prop="user_firstName"
       :rules="[
         {
           required: true,
@@ -51,7 +51,7 @@
     </el-form-item>
     <el-form-item
       label="Фамилия"
-      prop="lastName"
+      prop="user_lastName"
       :rules="[
         {
           required: true,
@@ -61,12 +61,12 @@
       ]">
       <el-input v-model="dynamicValidateForm.user_lastName" />
     </el-form-item>
-    <el-form-item label="Отчество" prop="middleName" :rules="[]">
+    <el-form-item label="Отчество" prop="user_middleName" :rules="[]">
       <el-input v-model="dynamicValidateForm.user_middleName" />
     </el-form-item>
     <el-form-item
       label="Дата рождения"
-      prop="birthday"
+      prop="user_birthday"
       :rules="[
         {
           required: true,
@@ -79,7 +79,7 @@
 
     <el-form-item
       label="Рост (см)"
-      prop="height"
+      prop="user_height"
       :rules="[
         {
           required: true,
@@ -92,7 +92,7 @@
 
     <el-form-item
       label="Вес (кг)"
-      prop="weight"
+      prop="user_weight"
       :rules="[
         {
           required: true,
@@ -129,7 +129,7 @@
 
     <el-form-item
       label="Цель тренировок"
-      prop="fitness_target"
+      prop="user_fitness_target"
       :rules="[
         {
           required: true,
@@ -146,7 +146,7 @@
       </el-select>
     </el-form-item>
 
-    <el-form-item label="Пол" prop="sex" :rules="[]" @click="toggleSex">
+    <el-form-item label="Пол" prop="user_sex" :rules="[]" @click="toggleSex">
       <el-switch v-model="dynamicValidateForm.user_sex" class="hidden" />
       {{ dynamicValidateForm.user_sex ? 'Мужской' : 'Женский' }}
       <el-icon :size="20">
@@ -181,8 +181,9 @@ import { getFitnessTargetList } from './getFitnessTargetList';
 
 const emit = defineEmits({ 'toggle-form': null, close: null });
 
-const { login, register, editUser } = useUserApi();
-const { authUser, user } = inject<ReturnType<typeof useAuthStore>>(USER_PROVIDE_SYMBOL)!;
+const { login, register, editUser, getUser } = useUserApi();
+const { authUser, setProfile, user } =
+  inject<ReturnType<typeof useAuthStore>>(USER_PROVIDE_SYMBOL)!;
 
 const userLevelList = getUserLevelList();
 const fitnessTargetList = getFitnessTargetList();
@@ -214,8 +215,8 @@ const toggleSex = () => {
 };
 
 const submit = async () => {
-  const { data } = await register(dynamicValidateForm);
-  console.log('register data', data);
+  await register(dynamicValidateForm);
+  // console.log('register data', data);
   const loginResponse = await login({
     email: dynamicValidateForm.email,
     password: dynamicValidateForm.password,
@@ -223,10 +224,9 @@ const submit = async () => {
   console.log('loginResponse', loginResponse);
   authUser(loginResponse.data);
   console.log('user', user.value?.uid);
-  const { data: editData } = await editUser({
-    ...dynamicValidateForm,
-  });
-  console.log('editData', editData);
+  await editUser(dynamicValidateForm);
+  const { data: profileData } = await getUser();
+  setProfile(profileData);
 
   close();
 };
