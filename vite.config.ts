@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
   process.env = { ...process.env, ...env };
 
   return {
-    base: './',
+    base: './suggest/',
     plugins: [
       vue(),
       tsconfigPaths(),
@@ -39,6 +39,12 @@ export default defineConfig(({ mode }) => {
     //
     build: {
       assetsDir: 'assets',
+      manifest: true,
+      rollupOptions: {
+        output: {
+          assetFileNames: 'assets/[name]-[hash][extname]'
+        }
+      },
       outDir: './dist',
       target: 'chrome90',
       sourcemap: false,
