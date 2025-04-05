@@ -33,8 +33,8 @@ const { getUser } = useUserApi();
 const { setProfile } = inject<ReturnType<typeof useAuthStore>>(USER_PROVIDE_SYMBOL)!;
 
 const loadProfile = async () => {
-  const { data: profileData } = await getUser();
-  setProfile(profileData);
+  const { data } = await getUser();
+  setProfile(data);
 };
 
 const loadProfileDecorated = useLoadingDecorator(loadProfile);
