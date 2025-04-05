@@ -1,14 +1,11 @@
 import type { TEditUserForm, TLoginResponse, TUser } from '@/types/User';
 import { ref, computed } from 'vue';
 import { jwtDecode } from 'jwt-decode';
-import useUserApi from '@/api/useUserApi';
 
 export const USER_PROVIDE_SYMBOL = Symbol('user');
 const TOKEN_STORAGE = 'jwt';
 
 export default () => {
-  const { getUser } = useUserApi();
-
   const user = ref<TUser | null>(null);
   const profile = ref<TEditUserForm | null>(null);
 
@@ -19,9 +16,10 @@ export default () => {
 
     if (newUser) sessionStorage.setItem(TOKEN_STORAGE, newUser.token);
     else sessionStorage.removeItem(TOKEN_STORAGE);
+  };
 
-    const { data } = await getUser();
-    profile.value = data;
+  const setProfile = async (newProfile: TEditUserForm | null) => {
+    profile.value = newProfile;
   };
 
   const authUser = (loginResponse: TLoginResponse) => {
@@ -36,5 +34,5 @@ export default () => {
     if (token) authUser({ token });
   })();
 
-  return { user, token, authUser, logout };
+  return { user, token, profile, authUser, logout, setProfile };
 };

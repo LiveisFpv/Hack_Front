@@ -18,12 +18,28 @@
 </template>
 
 <script lang="ts" setup>
-// import HeaderLayout from '@/components/layout/HeaderLayout.vue';
 import HeaderPage from '@/components/layout/HeaderPage.vue';
 import FilterAside from '@/components/layout/FIlterAside.vue';
 import { useFultersApp } from '@/utils/useFultersApp';
+import type useAuthStore from '@/store/useAuthStore';
+import { inject, onMounted } from 'vue';
+import { USER_PROVIDE_SYMBOL } from '@/store/useAuthStore';
+import { useLoadingDecorator } from '@/utils/useLoadingDecorator';
+import useUserApi from '@/api/useUserApi';
 
 const { isOpen } = useFultersApp;
+const { getUser } = useUserApi();
+
+const { setProfile } = inject<ReturnType<typeof useAuthStore>>(USER_PROVIDE_SYMBOL)!;
+
+const loadProfile = async () => {
+  const { data: profileData } = await getUser();
+  setProfile(profileData);
+};
+
+const loadProfileDecorated = useLoadingDecorator(loadProfile);
+
+onMounted(loadProfileDecorated);
 </script>
 
 <style lang="scss">
