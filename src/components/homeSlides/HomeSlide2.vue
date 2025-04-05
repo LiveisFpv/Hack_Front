@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts" setup>
-import Slide2Card from './slide2Card.vue';
+import Slide2Card from './Slide2Card.vue';
 import cardioSvg from './slide2Svg/cardio.svg';
 import helathSvg from './slide2Svg/helath.svg';
 import shapeSvg from './slide2Svg/shape.svg';
