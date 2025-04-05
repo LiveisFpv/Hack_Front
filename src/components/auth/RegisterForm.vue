@@ -47,7 +47,7 @@
           trigger: 'blur',
         },
       ]">
-      <el-input v-model="dynamicValidateForm.firstName" />
+      <el-input v-model="dynamicValidateForm.user_firstName" />
     </el-form-item>
     <el-form-item
       label="Фамилия"
@@ -59,10 +59,10 @@
           trigger: 'blur',
         },
       ]">
-      <el-input v-model="dynamicValidateForm.lastName" />
+      <el-input v-model="dynamicValidateForm.user_lastName" />
     </el-form-item>
     <el-form-item label="Отчество" prop="middleName" :rules="[]">
-      <el-input v-model="dynamicValidateForm.middleName" />
+      <el-input v-model="dynamicValidateForm.user_middleName" />
     </el-form-item>
     <el-form-item
       label="Дата рождения"
@@ -74,7 +74,7 @@
           trigger: 'blur',
         },
       ]">
-      <el-date-picker v-model="dynamicValidateForm.birthday" type="date" />
+      <el-date-picker v-model="dynamicValidateForm.user_birthday" type="date" />
     </el-form-item>
 
     <el-form-item
@@ -87,7 +87,7 @@
           trigger: 'blur',
         },
       ]">
-      <el-input-number v-model="dynamicValidateForm.height" :max="300" :min="50" />
+      <el-input-number v-model="dynamicValidateForm.user_height" :max="300" :min="50" />
     </el-form-item>
 
     <el-form-item
@@ -101,36 +101,58 @@
         },
       ]">
       <el-input-number
-        v-model="dynamicValidateForm.weight"
+        v-model="dynamicValidateForm.user_weight"
         :precision="2"
         :step="0.1"
         :max="300"
         :min="20" />
     </el-form-item>
 
+    <el-form-item
+      label="Уровень подготовки"
+      prop="user_level"
+      :rules="[
+        {
+          required: true,
+          message: 'Пожалуйста, введите уровень подготовки',
+          trigger: 'blur',
+        },
+      ]">
+      <el-select v-model="dynamicValidateForm.user_level" placeholder="Выбрать">
+        <el-option
+          v-for="item in userLevelList"
+          :key="item.id"
+          :label="item.title"
+          :value="item.id" />
+      </el-select>
+    </el-form-item>
+
+    <el-form-item
+      label="Цель тренировок"
+      prop="fitness_target"
+      :rules="[
+        {
+          required: true,
+          message: 'Пожалуйста, введите цель тренировок',
+          trigger: 'blur',
+        },
+      ]">
+      <el-select v-model="dynamicValidateForm.user_fitness_target" placeholder="Выбрать">
+        <el-option
+          v-for="item in fitnessTargetList"
+          :key="item.id"
+          :label="item.title"
+          :value="item.id" />
+      </el-select>
+    </el-form-item>
+
     <el-form-item label="Пол" prop="sex" :rules="[]" @click="toggleSex">
-      <el-switch v-model="dynamicValidateForm.sex" class="hidden" />
-      {{ dynamicValidateForm.sex ? 'Мужской' : 'Женский' }}
+      <el-switch v-model="dynamicValidateForm.user_sex" class="hidden" />
+      {{ dynamicValidateForm.user_sex ? 'Мужской' : 'Женский' }}
       <el-icon :size="20">
-        <male v-if="dynamicValidateForm.sex" />
+        <male v-if="dynamicValidateForm.user_sex" />
         <female v-else />
       </el-icon>
-    </el-form-item>
-
-    <el-form-item label="Диабет" prop="diabet" :rules="[]">
-      <el-switch
-        v-model="dynamicValidateForm.diabet"
-        style="--el-switch-on-color: #ff4949; --el-switch-off-color: #13ce66"
-        active-text="Да"
-        inactive-text="Нет" />
-    </el-form-item>
-
-    <el-form-item label="Гипертония" prop="hypertain" :rules="[]">
-      <el-switch
-        v-model="dynamicValidateForm.hypertain"
-        style="--el-switch-on-color: #ff4949; --el-switch-off-color: #13ce66"
-        active-text="Да"
-        inactive-text="Нет" />
     </el-form-item>
 
     <el-form-item label-position="left">
@@ -147,37 +169,48 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, inject, onMounted } from 'vue';
+import { reactive, ref, inject, onMounted, watch } from 'vue';
 import { Male, Female } from '@element-plus/icons-vue';
 import type { FormInstance } from 'element-plus';
 import type { TEditUserForm, TRegisterForm } from '@/types/User';
 import useUserApi from '@/api/useUserApi';
 import useAuthStore, { USER_PROVIDE_SYMBOL } from '@/store/useAuthStore';
 import { useLoadingDecorator } from '@/utils/useLoadingDecorator';
+import { getUserLevelList } from './getUserLevelList';
+import { getFitnessTargetList } from './getFitnessTargetList';
 
 const emit = defineEmits({ 'toggle-form': null, close: null });
 
 const { login, register, editUser } = useUserApi();
 const { authUser, user } = inject<ReturnType<typeof useAuthStore>>(USER_PROVIDE_SYMBOL)!;
 
+const userLevelList = getUserLevelList();
+const fitnessTargetList = getFitnessTargetList();
+
 const formRef = ref<FormInstance>();
 const dynamicValidateForm = reactive<TRegisterForm & TEditUserForm>({
   password: '',
   email: '',
-  firstName: '',
-  lastName: '',
-  middleName: '',
-  birthday: '',
-  height: undefined,
-  weight: undefined,
-  fitness_target: null,
-  sex: false,
-  hypertain: false,
-  diabet: false,
+  user_firstName: '',
+  user_lastName: '',
+  user_middleName: '',
+  user_birthday: '',
+  user_height: undefined,
+  user_weight: undefined,
+  user_fitness_target: '',
+  user_sex: false,
+  user_level: '',
 });
 
+watch(
+  () => dynamicValidateForm.user_level,
+  () => {
+    console.log('dynamicValidateForm.user_level', dynamicValidateForm.user_level);
+  },
+);
+
 const toggleSex = () => {
-  dynamicValidateForm.sex = !dynamicValidateForm.sex;
+  dynamicValidateForm.user_sex = !dynamicValidateForm.user_sex;
 };
 
 const submit = async () => {
@@ -191,7 +224,6 @@ const submit = async () => {
   authUser(loginResponse.data);
   console.log('user', user.value?.uid);
   const { data: editData } = await editUser({
-    uid: user.value?.uid,
     ...dynamicValidateForm,
   });
   console.log('editData', editData);
