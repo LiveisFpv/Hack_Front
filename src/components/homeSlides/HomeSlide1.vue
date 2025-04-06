@@ -97,4 +97,31 @@
     height: 100%;
   }
 }
+
+@media screen and (max-width: 1000px) {
+  .slide-1 {
+    &__container {
+      flex-direction: column-reverse;
+      gap: 25px;
+    }
+
+    &__info {
+      max-width: 100%;
+    }
+
+    &__img {
+      padding: 5px;
+      max-width: 100%;
+    }
+
+    &__image {
+      margin: 0 auto;
+      max-width: 100%;
+    }
+
+    &__notification-card {
+      left: -10px;
+    }
+  }
+}
 </style>
