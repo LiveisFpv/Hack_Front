@@ -21,15 +21,15 @@ export default () => {
   };
 
   const editUser = async (editUserForm: TEditUserForm) => {
-    return await put<TEditUserResponse>('/v1/edit-profile', editUserForm);
+    return await put<TEditUserResponse>('/api/v1/edit-profile', editUserForm);
   };
 
   const createProfile = async (editUserForm: TEditUserForm) => {
-    return await post<TEditUserResponse>('/v1/edit-profile', editUserForm);
+    return await post<TEditUserResponse>('/api/v1/edit-profile', editUserForm);
   };
 
   const getUser = async () => {
-    return await get<GetItemResponse<TEditUserForm>>('/v1/user');
+    return await get<GetItemResponse<TEditUserForm>>('/api/v1/user');
   };
 
   return { login, register, getUser, editUser, createProfile };
