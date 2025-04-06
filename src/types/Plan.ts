@@ -91,7 +91,7 @@ export type TSimpleRow = {
   dateStr: string;
   diet: TDietPlanTime;
   training: TTrainingPlanTime[];
-  weight: number;
+  weight?: number;
 };
 
 export type TTrainingPlanByDate = Record<string, TSimpleRow>;

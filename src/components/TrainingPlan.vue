@@ -151,7 +151,7 @@ const weekDatesObj = computed(() =>
       date,
       weekDay: getWeekDay(date),
       training: [],
-      weight: profile.value?.user_weight ?? 0,
+      weight: undefined,
     };
     return obj;
   }, {} as TTrainingPlanByDate),
@@ -173,6 +173,8 @@ const dietPlanByDate = computed<TTrainingPlanByDate>(() =>
       dish_fats: dietPlanItem.dish_fats,
       dish_carbs: dietPlanItem.dish_carbs,
     });
+
+    obj[date].weight = profile.value?.weight ?? 0
 
     return obj;
   }, weekDatesObj.value),
