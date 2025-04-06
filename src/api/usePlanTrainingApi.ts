@@ -22,14 +22,14 @@ export default () => {
   const getDiet = async (params: GetItemRequest): Promise<GetItemResponse<TDiet>> => {
     console.log('params', params);
     // return new Promise((resolve) => resolve(getDietMock()));
-    return await get('/v1/training-plan', params);
+    return await get('/api/v1/training-plan', params);
   };
 
   const getDietPlan = async (params?: {
     date: string;
   }): Promise<GetListResponse<TDietPlan>> => {
     // return new Promise((resolve) => resolve(getDietPlanMock()));
-    return await get('/v1/diet-plan', params as unknown as GetItemRequest);
+    return await get('/api/v1/diet-plan', params as unknown as GetItemRequest);
   };
 
   // Овсянка  https://1000.menu/cooking/70531-ovsyanaya-kasha-na-vode-i-moloke
@@ -48,14 +48,14 @@ export default () => {
   ): Promise<GetItemResponse<TTraining>> => {
     console.log('params', params);
     // return new Promise((resolve) => resolve(getTrainingMock()));
-    return await get('/v1/training-plan', params);
+    return await get('/api/v1/training-plan', params);
   };
 
   const getTrainingPlan = async (params?: {
     date: string;
   }): Promise<GetListResponse<TTrainingPlan>> => {
     // return new Promise((resolve) => resolve(getTrainingPlanMock()));
-    return await get('/v1/training-plan', params as unknown as GetItemRequest);
+    return await get('/api/v1/training-plan', params as unknown as GetItemRequest);
   };
 
   const getTrainingInstr = async (
@@ -77,7 +77,7 @@ export default () => {
   const changeWeightHistory = async (
     params: TWeightHistoryPutRequest,
   ): Promise<GetItemResponse<boolean>> => {
-    return await put('/v1/weight-history', params);
+    return await put('/api/v1/weight-history', params);
   };
 
   return {
