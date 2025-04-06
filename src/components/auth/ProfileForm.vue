@@ -168,7 +168,7 @@ const { profile, setProfile } =
 const router = useRouter();
 const { editUser, getUser } = useUserApi();
 
-// if (!profile.value) router.push({ name: 'home' });
+if (!profile.value) router.push({ name: 'home' });
 
 const formRef = ref<FormInstance>();
 const dynamicValidateForm = ref<TEditUserForm>({ ...profile.value! });
