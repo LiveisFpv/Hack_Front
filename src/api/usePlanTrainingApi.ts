@@ -17,9 +17,11 @@ import { getTrainingInstrMock } from './mocks/getTrainingInstrMock';
 import { getWeightHistoryMock } from './mocks/getWeightHistoryMock';
 import { getDietMock } from './mocks/getDietMock';
 import { getTrainingMock } from './mocks/getTrainingMock';
+import { getDietPlanMock } from './mocks/getDietPlanMock';
+import { getTrainingPlanMock } from './mocks/getTrainingPlanMock';
 
 export default () => {
-  const { get, put } = useBaseApi();
+  const { put } = useBaseApi();
 
   const getDiet = async (params: GetItemRequest): Promise<GetItemResponse<TDiet>> => {
     console.log('params', params);
@@ -30,8 +32,9 @@ export default () => {
   const getDietPlan = async (params?: {
     date: string;
   }): Promise<GetListResponse<TDietPlan>> => {
-    // return new Promise((resolve) => resolve(getDietPlanMock()));
-    return await get('/api/v1/diet-plan', params as unknown as GetItemRequest);
+    console.log(params);
+    return new Promise((resolve) => resolve(getDietPlanMock()));
+    // return await get('/api/v1/diet-plan', params as unknown as GetItemRequest);
   };
 
   // Овсянка  https://1000.menu/cooking/70531-ovsyanaya-kasha-na-vode-i-moloke
@@ -56,8 +59,9 @@ export default () => {
   const getTrainingPlan = async (params?: {
     date: string;
   }): Promise<GetListResponse<TTrainingPlan>> => {
-    // return new Promise((resolve) => resolve(getTrainingPlanMock()));
-    return await get('/api/v1/training-plan', params as unknown as GetItemRequest);
+    console.log(params);
+    return new Promise((resolve) => resolve(getTrainingPlanMock()));
+    // return await get('/api/v1/training-plan', params as unknown as GetItemRequest);
   };
 
   const getTrainingInstr = async (
