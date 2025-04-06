@@ -104,4 +104,16 @@ onMounted(() => loadDataDecorated(trainingId.value));
     height: 100%;
   }
 }
+
+@media screen and (max-width: 720px) {
+  .instruction-page {
+    &__card {
+      flex-direction: column-reverse;
+
+      &:nth-child(2n) {
+        flex-direction: column-reverse;
+      }
+    }
+  }
+}
 </style>
