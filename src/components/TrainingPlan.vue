@@ -174,7 +174,7 @@ const dietPlanByDate = computed<TTrainingPlanByDate>(() =>
       dish_carbs: dietPlanItem.dish_carbs,
     });
 
-    obj[date].weight = profile.value?.weight ?? 0
+    obj[date].weight = profile.value?.user_weight ?? 0;
 
     return obj;
   }, weekDatesObj.value),
