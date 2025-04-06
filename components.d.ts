@@ -10,6 +10,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AuthContainer: typeof import('./src/components/auth/AuthContainer.vue')['default']
     AuthForm: typeof import('./src/components/auth/AuthForm.vue')['default']
+    CalTable: typeof import('./src/components/CalTable.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElContainer: typeof import('element-plus/es')['ElContainer']
@@ -36,6 +37,7 @@ declare module 'vue' {
     HomeSlide1: typeof import('./src/components/homeSlides/HomeSlide1.vue')['default']
     HomeSlide2: typeof import('./src/components/homeSlides/HomeSlide2.vue')['default']
     HomeSlide3: typeof import('./src/components/homeSlides/HomeSlide3.vue')['default']
+    InstructionCard: typeof import('./src/components/InstructionCard.vue')['default']
     ProfileForm: typeof import('./src/components/auth/ProfileForm.vue')['default']
     RecipePage: typeof import('./src/components/RecipePage.vue')['default']
     RegisterForm: typeof import('./src/components/auth/RegisterForm.vue')['default']

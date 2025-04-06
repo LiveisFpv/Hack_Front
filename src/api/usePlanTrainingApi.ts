@@ -15,6 +15,8 @@ import useBaseApi from './base/useBaseApi';
 import { getRecipeDietMock } from './mocks/getRecipeDietMock';
 import { getTrainingInstrMock } from './mocks/getTrainingInstrMock';
 import { getWeightHistoryMock } from './mocks/getWeightHistoryMock';
+import { getDietMock } from './mocks/getDietMock';
+import { getTrainingMock } from './mocks/getTrainingMock';
 
 export default () => {
   const { get, put } = useBaseApi();
