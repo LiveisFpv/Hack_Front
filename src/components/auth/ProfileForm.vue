@@ -7,6 +7,7 @@
         ref="formRef"
         :model="dynamicValidateForm"
         label-width="auto"
+        style="--el-text-color-regular: white"
         class="demo-dynamic">
         <el-form-item
           label="Фамилия"
@@ -134,7 +135,9 @@
 
         <el-form-item label-position="left">
           <el-button type="primary" @click="submitForm(formRef)"> Изменить </el-button>
-          <el-button @click="resetForm">Очистить</el-button>
+          <el-button style="--el-text-color-regular: black" @click="resetForm"
+            >Очистить</el-button
+          >
         </el-form-item>
         <el-footer class="text-center">
           <slot name="footer"></slot>
@@ -165,7 +168,7 @@ const { profile, setProfile } =
 const router = useRouter();
 const { editUser, getUser } = useUserApi();
 
-if (!profile.value) router.push({ name: 'home' });
+// if (!profile.value) router.push({ name: 'home' });
 
 const formRef = ref<FormInstance>();
 const dynamicValidateForm = ref<TEditUserForm>({ ...profile.value! });
