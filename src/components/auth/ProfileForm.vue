@@ -20,7 +20,9 @@
               trigger: 'blur',
             },
           ]">
-          <el-input v-model="dynamicValidateForm.user_lastName" />
+          <el-input
+            v-model="dynamicValidateForm.user_lastName"
+            style="--el-text-color-regular: black" />
         </el-form-item>
         <el-form-item
           label="Имя"
@@ -32,10 +34,14 @@
               trigger: 'blur',
             },
           ]">
-          <el-input v-model="dynamicValidateForm.user_firstName" />
+          <el-input
+            v-model="dynamicValidateForm.user_firstName"
+            style="--el-text-color-regular: black" />
         </el-form-item>
         <el-form-item label="Отчество" prop="user_middleName" :rules="[]">
-          <el-input v-model="dynamicValidateForm.user_middleName" />
+          <el-input
+            v-model="dynamicValidateForm.user_middleName"
+            style="--el-text-color-regular: black" />
         </el-form-item>
         <el-form-item
           label="Дата рождения"
@@ -47,7 +53,10 @@
               trigger: 'blur',
             },
           ]">
-          <el-date-picker v-model="dynamicValidateForm.user_birthday" type="date" />
+          <el-date-picker
+            v-model="dynamicValidateForm.user_birthday"
+            type="date"
+            style="--el-text-color-regular: black" />
         </el-form-item>
 
         <el-form-item
@@ -63,7 +72,8 @@
           <el-input-number
             v-model="dynamicValidateForm.user_height"
             :max="300"
-            :min="50" />
+            :min="50"
+            style="--el-text-color-regular: black" />
         </el-form-item>
 
         <el-form-item
@@ -81,7 +91,8 @@
             :precision="2"
             :step="0.1"
             :max="300"
-            :min="20" />
+            :min="20"
+            style="--el-text-color-regular: black" />
         </el-form-item>
 
         <el-form-item
@@ -94,7 +105,10 @@
               trigger: 'blur',
             },
           ]">
-          <el-select v-model="dynamicValidateForm.user_level" placeholder="Выбрать">
+          <el-select
+            v-model="dynamicValidateForm.user_level"
+            placeholder="Выбрать"
+            style="--el-text-color-regular: black">
             <el-option
               v-for="item in userLevelList"
               :key="item.id"
@@ -115,7 +129,8 @@
           ]">
           <el-select
             v-model="dynamicValidateForm.user_fitness_target"
-            placeholder="Выбрать">
+            placeholder="Выбрать"
+            style="--el-text-color-regular: black">
             <el-option
               v-for="item in fitnessTargetList"
               :key="item.id"
@@ -168,7 +183,7 @@ const { profile, setProfile } =
 const router = useRouter();
 const { editUser, getUser } = useUserApi();
 
-if (!profile.value) router.push({ name: 'home' });
+// if (!profile.value) router.push({ name: 'home' });
 
 const formRef = ref<FormInstance>();
 const dynamicValidateForm = ref<TEditUserForm>({ ...profile.value! });
