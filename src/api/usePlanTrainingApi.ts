@@ -12,20 +12,14 @@ import type {
   TWeightHistoryPutRequest,
 } from '@/types';
 import useBaseApi from './base/useBaseApi';
-import { getDietPlanMock } from './mocks/getDietPlanMock';
 import { getRecipeDietMock } from './mocks/getRecipeDietMock';
-import { getTrainingPlanMock } from './mocks/getTrainingPlanMock';
 import { getTrainingInstrMock } from './mocks/getTrainingInstrMock';
 import { getWeightHistoryMock } from './mocks/getWeightHistoryMock';
-import { getTrainingMock } from './mocks/getTrainingMock';
-import { getDietMock } from './mocks/getDietMock';
 
 export default () => {
   const { get, put } = useBaseApi();
 
-  const getDiet = async (
-    params: GetItemRequest,
-  ): Promise<GetItemResponse<TDiet>> => {
+  const getDiet = async (params: GetItemRequest): Promise<GetItemResponse<TDiet>> => {
     console.log('params', params);
     // return new Promise((resolve) => resolve(getDietMock()));
     return await get('/v1/training-plan', params);
@@ -34,9 +28,8 @@ export default () => {
   const getDietPlan = async (params?: {
     date: string;
   }): Promise<GetListResponse<TDietPlan>> => {
-    console.log('params', params);
     // return new Promise((resolve) => resolve(getDietPlanMock()));
-    return await get('/v1/diet-plan', params);
+    return await get('/v1/diet-plan', params as unknown as GetItemRequest);
   };
 
   // Овсянка  https://1000.menu/cooking/70531-ovsyanaya-kasha-na-vode-i-moloke
@@ -61,9 +54,8 @@ export default () => {
   const getTrainingPlan = async (params?: {
     date: string;
   }): Promise<GetListResponse<TTrainingPlan>> => {
-    console.log('params', params);
     // return new Promise((resolve) => resolve(getTrainingPlanMock()));
-    return await get('/v1/training-plan', params);
+    return await get('/v1/training-plan', params as unknown as GetItemRequest);
   };
 
   const getTrainingInstr = async (
