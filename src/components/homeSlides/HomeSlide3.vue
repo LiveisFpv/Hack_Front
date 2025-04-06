@@ -107,4 +107,16 @@
     max-width: 100%;
   }
 }
+
+@media screen and (max-width: 720px) {
+  .slide-3 {
+    & &__card {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 100%;
+    }
+  }
+}
 </style>

@@ -42,6 +42,7 @@
 
   &__image {
     max-width: 913px;
+    width: 100%;
     max-height: 851px;
   }
 
@@ -49,6 +50,7 @@
     display: flex;
     flex-direction: column;
     max-width: 648px;
+    width: 50%;
     justify-content: center;
     gap: 65px;
   }
@@ -73,6 +75,7 @@
   }
 
   &__img {
+    width: 50%;
     position: relative;
   }
 
@@ -100,6 +103,8 @@
 
 @media screen and (max-width: 1000px) {
   .slide-1 {
+    padding: 15px 0;
+
     &__container {
       flex-direction: column-reverse;
       gap: 25px;
@@ -107,10 +112,13 @@
 
     &__info {
       max-width: 100%;
+      width: 100%;
+      gap: 15px;
     }
 
     &__img {
       padding: 5px;
+      width: 100%;
       max-width: 100%;
     }
 

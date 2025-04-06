@@ -7,12 +7,14 @@
     </el-container>
 
     <el-container class="header-page__links">
-      <RouterLink class="router-link" :to="{ name: 'home' }"> Главная </RouterLink>
-      <RouterLink class="router-link" :to="{ name: 'training-plan' }"> План </RouterLink>
+      <RouterLink class="router-link header-page__home-link" :to="{ name: 'home' }">
+        Главная
+      </RouterLink>
+      <RouterLink v-if="user" class="router-link" :to="{ name: 'training-plan' }"> План </RouterLink>
     </el-container>
     <el-container>
       <template v-if="user">
-        <div class="flex items-center">
+        <div class="header-page__profile">
           <el-dropdown>
             <el-avatar
               :size="32"
@@ -26,12 +28,14 @@
             </template>
           </el-dropdown>
 
-          <span class="text-large font-600 mr-3">
-            {{ profile?.user_lastName ?? '-' }}
-          </span>
-          <span class="text-sm mr-2" style="color: var(--el-text-color-regular)">
-            {{ profile?.user_firstName ?? '-' }}
-          </span>
+          <div class="header-page__name">
+            <span class="header-page__last-name">
+              {{ profile?.user_lastName ?? '-' }}
+            </span>
+            <span class="header-page__first-name">
+              {{ profile?.user_firstName ?? '-' }}
+            </span>
+          </div>
         </div>
       </template>
       <template v-else>
@@ -82,6 +86,22 @@ const close = () => (dialogVisible.value = false);
   width: 100%;
   padding-left: 20px;
 
+  &__profile {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  &__name {
+    display: flex;
+    flex-direction: column;
+    color: white;
+  }
+
+  &__last-name {
+    font-weight: 600;
+  }
+
   &__setting-icon {
     margin-right: 8px;
     margin-top: 1px;
@@ -126,6 +146,15 @@ const close = () => (dialogVisible.value = false);
 
   &__gym {
     color: #fd4c00;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .header-page {
+    &__home-link,
+    &__name {
+      display: none;
+    }
   }
 }
 </style>

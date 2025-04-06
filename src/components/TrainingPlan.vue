@@ -19,7 +19,7 @@
           --el-table-current-row-bg-color: rgba(253, 76, 0, 0.2);
         "
         @current-change="setCurrent">
-        <el-table-column prop="dateStr" label="Дата" />
+        <el-table-column prop="dateStr" label="Дата" width="180" />
         <el-table-column prop="weekDay" label="День недели" width="180" />
         <el-table-column label="Завтрак" width="180">
           <template #default="simpleRow">
@@ -28,7 +28,7 @@
                 v-for="(dietItem, idx) in simpleRow.row.diet['Завтрак']"
                 :key="idx"
                 :to="{ name: 'recipe', query: { id: dietItem.dish_id } }">
-                {{ dietItem.dish_title }}
+                {{ dietItem.dish_title }}({{ dietItem.dish_weight }}г)
               </router-link>
             </div>
           </template>
@@ -40,7 +40,7 @@
                 v-for="(dietItem, idx) in simpleRow.row.diet['Обед']"
                 :key="idx"
                 :to="{ name: 'recipe', query: { id: dietItem.dish_id } }">
-                {{ dietItem.dish_title }}
+                {{ dietItem.dish_title }}({{ dietItem.dish_weight }}г)
               </router-link>
             </div>
           </template>
@@ -52,7 +52,7 @@
                 v-for="(dietItem, idx) in simpleRow.row.diet['Ужин']"
                 :key="idx"
                 :to="{ name: 'recipe', query: { id: dietItem.dish_id } }">
-                {{ dietItem.dish_title }}
+                {{ dietItem.dish_title }}({{ dietItem.dish_weight }}г)
               </router-link>
             </div>
           </template>
@@ -64,7 +64,7 @@
                 v-for="(dietItem, idx) in simpleRow.row.diet['Ужин']"
                 :key="idx"
                 :to="{ name: 'recipe', query: { id: dietItem.dish_id } }">
-                {{ dietItem.dish_title }}
+                {{ dietItem.dish_title }}({{ dietItem.dish_weight }}г)
               </router-link>
             </div>
           </template>
@@ -131,8 +131,6 @@ const dietPlan = ref<TDietPlan[]>([]);
 const trainingPlan = ref<TTrainingPlan[]>([]);
 const weightHistory = ref<TWeightHistory[]>([]);
 const currentMondayDate = ref<Date>(getMondayByWeekDay(new Date()));
-const currentRow = ref('2025-04-06');
-console.log('currentRow', currentRow);
 
 const weekDates = computed<Date[]>(() => [...generateWeekDates(currentMondayDate.value)]);
 const weekDatesStr = computed<string[]>(() =>
@@ -240,7 +238,7 @@ const onBlurWeight = useLoadingDecorator(async (date: string, weight: number) =>
   await changeWeightHistory({ date, weight });
 });
 
-onMounted(() => loadDataDecorated(Intl.DateTimeFormat().format(currentMondayDate.value)));
+onMounted(() => loadDataDecorated(currentMondayDate.value.toString()));
 </script>
 
 <style lang="scss" scoped>

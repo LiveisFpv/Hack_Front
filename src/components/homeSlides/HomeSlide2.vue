@@ -93,4 +93,19 @@ const cards: { svg: string; title: string; description: string }[] = [
     max-width: 57px;
   }
 }
+
+@media screen and (max-width: 1000px) {
+  .slide-2 {
+    &__cards {
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+    }
+
+    &__card {
+      max-width: 400px;
+    }
+  }
+}
 </style>
