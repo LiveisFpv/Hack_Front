@@ -23,8 +23,8 @@ export default () => {
 
   const getDiet = async (params: GetItemRequest): Promise<GetItemResponse<TDiet>> => {
     console.log('params', params);
-    // return new Promise((resolve) => resolve(getDietMock()));
-    return await get('/api/v1/training-plan', params);
+    return new Promise((resolve) => resolve(getDietMock()));
+    // return await get('/api/v1/training-plan', params);
   };
 
   const getDietPlan = async (params?: {
@@ -49,8 +49,8 @@ export default () => {
     params: GetItemRequest,
   ): Promise<GetItemResponse<TTraining>> => {
     console.log('params', params);
-    // return new Promise((resolve) => resolve(getTrainingMock()));
-    return await get('/api/v1/training-plan', params);
+    return new Promise((resolve) => resolve(getTrainingMock()));
+    // return await get('/api/v1/training-plan', params);
   };
 
   const getTrainingPlan = async (params?: {
