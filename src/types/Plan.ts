@@ -1,5 +1,16 @@
 export type TDishTime = 'Завтрак' | 'Обед' | 'Полдник' | 'Ужин';
 
+export type TDiet = {
+  dish_id: number;
+  dish_time: 'Завтрак' | 'Обед' | 'Полдник' | 'Ужин';
+  dish_title: string;
+  dish_kcal: number;
+  dish_proteins: number;
+  dish_fats: number;
+  dish_carbs: number;
+  dish_desc: string;
+};
+
 export type TDietPlan = {
   dish_id: number;
   user_id: number;
@@ -33,6 +44,13 @@ export type TRecipeDiet = {
   recipe_order: number;
   recipe_instruct: string;
   recipe_img: string | null;
+};
+
+export type TTraining = {
+  training_id: number;
+  training_title: string;
+  training_desc: string;
+  training_user_level: number;
 };
 
 export type TTrainingPlan = {

@@ -37,11 +37,13 @@ declare module 'vue' {
     HomeSlide2: typeof import('./src/components/homeSlides/HomeSlide2.vue')['default']
     HomeSlide3: typeof import('./src/components/homeSlides/HomeSlide3.vue')['default']
     ProfileForm: typeof import('./src/components/auth/ProfileForm.vue')['default']
+    RecipePage: typeof import('./src/components/RecipePage.vue')['default']
     RegisterForm: typeof import('./src/components/auth/RegisterForm.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Slide2Card: typeof import('./src/components/homeSlides/Slide2Card.vue')['default']
     Slide3Card: typeof import('./src/components/homeSlides/Slide3Card.vue')['default']
+    TrainingPage: typeof import('./src/components/TrainingPage.vue')['default']
     TrainingPlan: typeof import('./src/components/TrainingPlan.vue')['default']
   }
 }

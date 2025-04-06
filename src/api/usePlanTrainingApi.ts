@@ -2,8 +2,10 @@ import type {
   GetItemRequest,
   GetItemResponse,
   GetListResponse,
+  TDiet,
   TDietPlan,
   TRecipeDiet,
+  TTraining,
   TTrainingInstr,
   TTrainingPlan,
   TWeightHistory,
@@ -15,9 +17,19 @@ import { getRecipeDietMock } from './mocks/getRecipeDietMock';
 import { getTrainingPlanMock } from './mocks/getTrainingPlanMock';
 import { getTrainingInstrMock } from './mocks/getTrainingInstrMock';
 import { getWeightHistoryMock } from './mocks/getWeightHistoryMock';
+import { getTrainingMock } from './mocks/getTrainingMock';
+import { getDietMock } from './mocks/getDietMock';
 
 export default () => {
   const { put } = useBaseApi();
+
+  const getDiet = async (
+    params: GetItemRequest,
+  ): Promise<GetItemResponse<TDiet>> => {
+    console.log('params', params);
+    return new Promise((resolve) => resolve(getDietMock()));
+    // return await get('/v1/training-plan', params);
+  };
 
   const getDietPlan = async (params?: {
     date: string;
@@ -36,6 +48,14 @@ export default () => {
     console.log('params', params);
     return new Promise((resolve) => resolve(getRecipeDietMock()));
     // return await get('/v1/recipeD-diet', params);
+  };
+
+  const getTraining = async (
+    params: GetItemRequest,
+  ): Promise<GetItemResponse<TTraining>> => {
+    console.log('params', params);
+    return new Promise((resolve) => resolve(getTrainingMock()));
+    // return await get('/v1/training-plan', params);
   };
 
   const getTrainingPlan = async (params?: {
@@ -69,8 +89,10 @@ export default () => {
   };
 
   return {
+    getDiet,
     getDietPlan,
     getRecipeDiet,
+    getTraining,
     getTrainingPlan,
     getTrainingInstr,
     getWeightHistory,
