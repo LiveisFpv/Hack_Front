@@ -238,7 +238,7 @@ const onBlurWeight = useLoadingDecorator(async (date: string, weight: number) =>
   await changeWeightHistory({ date, weight });
 });
 
-onMounted(() => loadDataDecorated(currentMondayDate.value.toString()));
+onMounted(() => loadDataDecorated(currentMondayDate.value.toISOString()));
 </script>
 
 <style lang="scss" scoped>
